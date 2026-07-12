@@ -1,11 +1,9 @@
+import Home from "./pages/home";
+
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900">
-      <h1 className="text-5xl font-bold text-white">
-        QR Generator Pro
-      </h1>
-    </div>
-  )
+    <Home />
+  );
 }
 
-export default App
+export default App;
