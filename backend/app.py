@@ -14,7 +14,7 @@ os.makedirs(QR_FOLDER, exist_ok=True)
 @app.route("/")
 def home():
     return {
-        "message": "QR Generator API Running 🚀"
+        "message": "QR Generator API Running"
     }
 
 
