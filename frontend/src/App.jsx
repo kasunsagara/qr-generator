@@ -1,7 +1,11 @@
 function App() {
   return (
-    <h1>QR Generator Pro</h1>
-  );
+    <div className="min-h-screen flex items-center justify-center bg-gray-900">
+      <h1 className="text-5xl font-bold text-white">
+        QR Generator Pro
+      </h1>
+    </div>
+  )
 }
 
-export default App;
+export default App
