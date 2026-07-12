@@ -1,5 +1,6 @@
 import Navbar from "../components/navbar";
 import QRForm from "../components/qrForm";
+import QRPreview from "../components/qrPreview";
 
 function Home() {
   return (
@@ -19,6 +20,8 @@ function Home() {
         </p>
 
         <QRForm />
+
+        <QRPreview />
 
       </main>
 
