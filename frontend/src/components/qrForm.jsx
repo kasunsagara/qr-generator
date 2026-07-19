@@ -4,7 +4,7 @@ import API from "../services/api";
 const initialFields = [];
 
 function QRForm({ setQrImage, setQrDetails }) {
-  const [formTitle, setFormTitle] = useState("User Details");
+  const [formTitle, setFormTitle] = useState("");
   const [fields, setFields] = useState(initialFields);
   const [values, setValues] = useState({});
   const [fieldLabel, setFieldLabel] = useState("");
@@ -98,7 +98,7 @@ function QRForm({ setQrImage, setQrDetails }) {
           type="text"
           value={formTitle}
           onChange={(e) => setFormTitle(e.target.value)}
-          placeholder="Enter form title"
+          placeholder="User Details"
           className="w-full px-5 py-4 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
