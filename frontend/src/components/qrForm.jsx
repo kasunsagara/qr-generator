@@ -7,7 +7,9 @@ const predefinedFields = [
   { label: "Phone", type: "tel" },
   { label: "URL", type: "url" },
   { label: "Address", type: "text" },
-  { label: "Company", type: "text" }
+  { label: "Company", type: "text" },
+  { label: "City", type: "text" },
+  { label: "Country", type: "text" }
 ];
 
 const initialFields = [];
