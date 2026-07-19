@@ -1,6 +1,15 @@
 import { useState } from "react";
 import API from "../services/api";
 
+const predefinedFields = [
+  { label: "Name", type: "text" },
+  { label: "Email", type: "email" },
+  { label: "Phone", type: "tel" },
+  { label: "URL", type: "url" },
+  { label: "Address", type: "text" },
+  { label: "Company", type: "text" }
+];
+
 const initialFields = [];
 
 function QRForm({ setQrImage, setQrDetails }) {
@@ -8,31 +17,37 @@ function QRForm({ setQrImage, setQrDetails }) {
   const [fields, setFields] = useState(initialFields);
   const [values, setValues] = useState({});
   const [fieldLabel, setFieldLabel] = useState("");
-  const [fieldType, setFieldType] = useState("text");
+  const [selectedField, setSelectedField] = useState("");
   const [loading, setLoading] = useState(false);
 
   const addField = () => {
-    const label = fieldLabel.trim();
+    const manualLabel = fieldLabel.trim();
+    const selected = predefinedFields.find((item) => item.label === selectedField);
+    const label = manualLabel || (selected ? selected.label : "");
+
     if (!label) {
-      alert("Please enter a field label.");
+      alert("Please type or select a field to add.");
       return;
     }
 
-    if (fields.some((field) => field.label.toLowerCase() === label.toLowerCase())) {
-      alert("A field with that label already exists.");
+    if (fields.some((existing) => existing.label.toLowerCase() === label.toLowerCase())) {
+      alert("This field is already added.");
       return;
     }
+
+    const type = selected?.type || "text";
 
     const newField = {
       id: Date.now(),
       label,
-      type: fieldType,
+      type,
       placeholder: `Enter ${label.toLowerCase()}`
     };
 
     setFields((prev) => [...prev, newField]);
     setValues((prev) => ({ ...prev, [label]: "" }));
     setFieldLabel("");
+    setSelectedField("");
   };
 
   const removeField = (id) => {
@@ -105,24 +120,25 @@ function QRForm({ setQrImage, setQrDetails }) {
 
       <div className="mt-8 p-6 rounded-3xl bg-slate-950 border border-slate-800">
         <h3 className="text-xl font-semibold mb-4">Add a new field</h3>
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="space-y-4">
           <input
             type="text"
             value={fieldLabel}
             onChange={(e) => setFieldLabel(e.target.value)}
-            placeholder="Field label (e.g. Email)"
+            placeholder="Type field label (e.g. Custom)"
             className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
           />
           <select
-            value={fieldType}
-            onChange={(e) => setFieldType(e.target.value)}
+            value={selectedField}
+            onChange={(e) => setSelectedField(e.target.value)}
             className="w-full px-4 py-3 rounded-xl bg-slate-800 text-white outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="text">Text</option>
-            <option value="email">Email</option>
-            <option value="tel">Phone</option>
-            <option value="url">URL</option>
-            <option value="number">Number</option>
+            <option value="">Select a common field</option>
+            {predefinedFields.map((field) => (
+              <option key={field.label} value={field.label}>
+                {field.label}
+              </option>
+            ))}
           </select>
         </div>
         <button
