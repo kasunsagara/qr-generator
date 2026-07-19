@@ -29,10 +29,10 @@ function Home() {
         </p>
 
 
-        <QRForm setQrImage={setQrImage}/>
+        <QRForm setQrImage={setQrImage} />
 
 
-        <QRPreview qrImage={qrImage}/>
+        <QRPreview qrImage={qrImage} />
 
 
       </main>
